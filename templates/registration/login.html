@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Login Page{% endblock title %}
+
+{% block content %} 
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success ml-2" type="submit">Log In</button>
+        <br><br>
+        <a href="{% url 'password_reset' %}">Forgot Password?</a>
+        <br><br>
+        <a href="{% url 'signup' %}">If you do not have an account, Sign Up!</a>
+        <br><br>
+        <a href="{% url 'home' %}">Go to the HomePage</a>
+    </form>
+{% endblock content %}
