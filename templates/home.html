@@ -3,20 +3,38 @@
 {% block title %}Quiz Home Page{% endblock title %}
 
 {% block content %} 
-    <h2>Home</h2>
+    <h2>Home</h2> <p></p>
     {% if user.is_authenticated %}
         <p>Hi {{user.username}}</p>
         <br>
-        <a href="{% url 'profile' user.id %}">Edit Profile</a>
+        <div class="container-fluid">
+            <p class="text-center">Select Quiz</p>
+                <div class="row">
+                    {% for course in courses %}
+                        <div class="col-lg">
+                            <a href="/{{course.id}}" class="btn btn-primary">{{course.course_name}}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+        </div>
+        
+<br>
+
+        <a class="btn btn-outline-success" href="{% url 'profile' user.id %}">Edit Profile</a>
         <br><br>
-        <a href="{% url 'change_password' %}">Change Password</a>
+        <a class="btn btn-outline-dark" href="{% url 'change_password' %}">Change Password</a>
         <br><br>
-        <a href="{% url 'logout' %}">Logout</a>
+        <a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
+
+
     {% else %}
-        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'login' %}">Have an account? Login</a>
         <br><br>
-        <a href="{% url 'password_reset' %}">Forgot Password</a>
+        <a href="{% url 'password_reset' %}">Forgot Password?</a>
         <br><br>
-        <a href="{% url 'signup' %}">Sign Up</a>
+        <a href="{% url 'signup' %}">Create a new account, Sign Up!</a>
     {% endif %}
+
+
+
 {% endblock content %}

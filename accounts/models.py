@@ -4,11 +4,17 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class Profile(models.Model):
+    '''This defines the user model, which has the username and his confirmed email'''
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email_confirmed = models.BooleanField(default=False)
 
+def __str__(self):
+    return self.user
+
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
+    '''This function is to let the user update his profile (email and username)'''
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()
+
